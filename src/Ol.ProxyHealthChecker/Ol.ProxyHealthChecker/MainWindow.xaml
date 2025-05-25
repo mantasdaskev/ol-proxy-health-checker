@@ -1,12 +1,69 @@
-﻿<Window x:Class="Ol.ProxyHealthChecker.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Ol.ProxyHealthChecker"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
-</Window>
+﻿<lib:BaseWindow
+    x:Class="Ol.ProxyHealthChecker.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lib="clr-namespace:Ol.ProxyHealthChecker.Lib"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Ol.ProxyHealthChecker.ViewModels"
+    Title="Proxy Checker"
+    Width="800"
+    Height="450"
+    x:TypeArguments="vm:MainViewModel"
+    mc:Ignorable="d">
+    <DockPanel Margin="10">
+
+        <StackPanel
+            Margin="0,0,0,10"
+            DockPanel.Dock="Top"
+            Orientation="Horizontal">
+            <Button
+                Width="100"
+                Height="30"
+                Margin="0,0,10,0"
+                Command="{Binding CheckNowCommand}"
+                Content="Check Now" />
+        </StackPanel>
+
+        <DataGrid
+            AlternatingRowBackground="LightGray"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            HeadersVisibility="Column"
+            IsReadOnly="True"
+            ItemsSource="{Binding Proxies}"
+            SelectionMode="Single">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Ip}"
+                    Header="IP" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Location}"
+                    Header="Location" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding StatusMessage}"
+                    Header="Status" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding LastChecked}"
+                    Header="Last Checked" />
+                <DataGridTemplateColumn Width="60" Header="Healthy">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Ellipse
+                                Width="16"
+                                Height="16"
+                                Fill="{Binding IsHealthy, Converter={StaticResource BoolToBrushConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </DockPanel>
+
+</lib:BaseWindow>

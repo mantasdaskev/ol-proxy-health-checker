@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using Ol.ProxyHealthChecker.Lib;
+using Ol.ProxyHealthChecker.Services;
+using Ol.ProxyHealthChecker.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +22,9 @@ namespace Ol.ProxyHealthChecker
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : BaseWindow<MainViewModel>
     {
-        public MainWindow()
+        public MainWindow(MainViewModel vm) : base(vm)
         {
             InitializeComponent();
         }
