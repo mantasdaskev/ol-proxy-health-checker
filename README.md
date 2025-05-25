@@ -1,9 +1,18 @@
 # ol-proxy-health-checker
 Proxy Health Checker app. Tech task.
 
+## Instructions
+
+- Install Desktop development Workload
+- Install .NET Framework 4.8.1 SDK
+
+Should be enough.
+
+## About (in Lithuanian for convenience (and a bit because of the laziness))
+
 Užduoties vykdymo procesas buvo gana paprastas: "užsisukti" projeką ir pradėti 
-bottom-up: įsidejau mygtuka ir pradėjau nuo paprasto varianto, kuris darytų 
-minimaliai ko reikalaujama (atliktu užklausas per proxy). Sekantis žingsnis buvo 
+bottom-up: įsidėjau mygtuką ir pradėjau nuo paprasto varianto, kuris darytų 
+minimaliai ko reikalaujama (atliktų užklausas per proxy). Sekantis žingsnis buvo 
 susitvarkyti strūturą ir peržvelgti, ką dar galečiau spėti atlikti iš pateikto sąrašo. 
 Mano supratimu, neatlikau tik tamsios temos palaikymo ir "auto-refresh".
 
