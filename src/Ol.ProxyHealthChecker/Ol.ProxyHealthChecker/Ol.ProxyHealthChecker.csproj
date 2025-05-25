@@ -86,13 +86,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\FakeDataContext.cs" />
+    <Compile Include="Data\Repositories\ProxyRepository.cs" />
+    <Compile Include="Business\Services\ProxyCheckService.cs" />
+    <Compile Include="Core\Interfaces\IProxyCheckService.cs" />
+    <Compile Include="Core\Interfaces\IProxyRepository.cs" />
+    <Compile Include="Core\Models\Enum\ProxyState.cs" />
+    <Compile Include="Core\Models\Settings.cs" />
+    <Compile Include="Lib\AsyncRelayCommand.cs" />
     <Compile Include="Lib\BaseWindow.cs" />
-    <Compile Include="Lib\UI\BoolToBrushConverter.cs" />
-    <Compile Include="Models\Proxy.cs" />
-    <Compile Include="Models\ProxyItem.cs" />
-    <Compile Include="Services\ProxyDataService.cs" />
-    <Compile Include="Services\ProxyService.cs" />
+    <Compile Include="Lib\UI\InverseBooleanConverter.cs" />
+    <Compile Include="Lib\UI\ProxyStateToBrushConverter.cs" />
+    <Compile Include="Core\Models\Proxy.cs" />
+    <Compile Include="Utils\SettingsProvider.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\HistoryWindow.xaml.cs">
+      <DependentUpon>HistoryWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -107,9 +118,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\HistoryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Enum\ProxyState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -131,6 +145,9 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="appSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="proxies.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

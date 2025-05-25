@@ -2,6 +2,7 @@
     x:Class="Ol.ProxyHealthChecker.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cnv="clr-namespace:Ol.ProxyHealthChecker.Lib.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:lib="clr-namespace:Ol.ProxyHealthChecker.Lib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,6 +12,10 @@
     Height="450"
     x:TypeArguments="vm:MainViewModel"
     mc:Ignorable="d">
+    <Window.Resources>
+        <cnv:ProxyStateToBrushConverter x:Key="StateConverter" />
+        <cnv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    </Window.Resources>
     <DockPanel Margin="10">
 
         <StackPanel
@@ -22,7 +27,8 @@
                 Height="30"
                 Margin="0,0,10,0"
                 Command="{Binding CheckNowCommand}"
-                Content="Check Now" />
+                Content="Check Now"
+                IsEnabled="{Binding IsCheckRunning, Converter={StaticResource InverseBooleanConverter}}" />
         </StackPanel>
 
         <DataGrid
@@ -35,29 +41,41 @@
             SelectionMode="Single">
 
             <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Ip}"
-                    Header="IP" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Location}"
-                    Header="Location" />
+                <DataGridTextColumn Binding="{Binding Ip}" Header="IP" />
+                <DataGridTextColumn Binding="{Binding Location}" Header="Location" />
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding StatusMessage}"
                     Header="Status" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding LastChecked}"
-                    Header="Last Checked" />
+                <DataGridTextColumn Binding="{Binding LastChecked}" Header="Last Checked" />
                 <DataGridTemplateColumn Width="60" Header="Healthy">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Ellipse
                                 Width="16"
                                 Height="16"
-                                Fill="{Binding IsHealthy, Converter={StaticResource BoolToBrushConverter}}" />
+                                Fill="{Binding State, Converter={StaticResource StateConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.CheckSingleCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding .}"
+                                Content="Check"
+                                IsEnabled="{Binding DataContext.IsCheckRunning, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource InverseBooleanConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Click="HistoryClicked"
+                                CommandParameter="{Binding Ip}"
+                                Content="History" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
