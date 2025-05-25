@@ -8,6 +8,7 @@ namespace Ol.ProxyHealthChecker.Core.Interfaces
         List<ProxyItem> GetAll();
 
         ProxyItem GetByIp(string ip);
+
         ProxyItem Update(ProxyItem proxy);
 
         List<ProxyItem> UpdateAll(List<ProxyItem> proxies);

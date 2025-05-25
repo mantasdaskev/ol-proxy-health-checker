@@ -2,8 +2,6 @@
 using System.IO;
 using System.Text.Json;
 
-//TODO: get by relative path or something proxies list.
-
 namespace Ol.ProxyHealthChecker.Utils
 {
     public class SettingsProvider

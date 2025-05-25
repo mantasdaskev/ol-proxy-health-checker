@@ -86,6 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\Models\ProxyHistoryItem.cs" />
+    <Compile Include="Core\Models\ProxyItem.cs" />
     <Compile Include="Data\FakeDataContext.cs" />
     <Compile Include="Data\Repositories\ProxyRepository.cs" />
     <Compile Include="Business\Services\ProxyCheckService.cs" />

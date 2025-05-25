@@ -7,7 +7,9 @@ namespace Ol.ProxyHealthChecker.Core.Interfaces
     public interface IProxyCheckService
     {
         Task<List<ProxyItem>> CheckProxiesAsync();
+
         Task<ProxyItem> CheckSingleProxyAsync(ProxyItem proxyItem);
+
         List<ProxyItem> GetHistory(string ip);
     }
 }
